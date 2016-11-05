@@ -1,0 +1,22 @@
+{
+  "name": "staff",
+  "version": "1.0.0",
+  "description": "last",
+  "main": "./bundle/bundle.js",
+  "dependencies": {
+    "babel": "^6.5.2",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "webpack": "^1.13.3",
+    "webpack-dev-server": "^1.16.2"
+  },
+  "devDependencies": {
+    "css-loader": "^0.25.0",
+    "style-loader": "^0.13.1"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --hot"
+  },
+  "author": "",
+  "license": "ISC"
+}
