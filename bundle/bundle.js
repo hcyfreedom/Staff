@@ -72,7 +72,11 @@
 
 	var _StaffDetail2 = _interopRequireDefault(_StaffDetail);
 
-	__webpack_require__(177);
+	var _STAFF = __webpack_require__(177);
+
+	var _STAFF2 = _interopRequireDefault(_STAFF);
+
+	__webpack_require__(178);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -85,26 +89,53 @@
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 
 
-	var rawData = [{ info: { descrip: '祥云一中', sex: '男', age: 27, name: '顾尚华', id: '老师' } }, { info: { descrip: '祥云二中', sex: '女', age: 30, name: '大作', id: '主任' } }, { info: { descrip: '祥华中学', sex: '男', age: 25, name: '老班', id: '主任' } }, { info: { descrip: '祥云四中', sex: '女', age: 40, name: '小作', id: '主任' } }, { info: { descrip: '大理一中', sex: '女', age: 70, name: '小翠', id: '老师' } }, { info: { descrip: '下关一中', sex: '男', age: 15, name: '色魔', id: '学生' } }, { info: { descrip: '宾川一中', sex: '男', age: 12, name: '小数学', id: '实习' } }, { info: { descrip: '弥渡一中', sex: '女', age: 60, name: '吴帆', id: '老师' } }, { info: { descrip: '宣威一中', sex: '男', age: 55, name: '小地理', id: '老师' } }, { info: { descrip: '下关一中', sex: '男', age: 15, name: '老y', id: '老师' } }, { info: { descrip: '宾川一中', sex: '男', age: 12, name: '鸡嘴', id: '学生' } }];
-
+	// var rawData =  [{info:{descrip:'祥云1中',sex:'男',age:57,name:'顾尚华',id:'老师'}},
+	//                 {info:{descrip:'祥云二中',sex:'女',age:30,name:'大作',id:'主任'}},
+	//                 {info:{descrip:'祥华中学',sex:'男',age:25,name:'老班',id:'主任'}},
+	//                 {info:{descrip:'祥云四中',sex:'女',age:40,name:'小作',id:'主任'}},
+	//                 {info:{descrip:'大理一中',sex:'女',age:70,name:'小翠',id:'老师'}},
+	//                 {info:{descrip:'下关一中',sex:'男',age:15,name:'色魔',id:'学生'}},
+	//                 {info:{descrip:'宾川一中',sex:'男',age:12,name:'小数学',id:'实习'}},
+	//                 {info:{descrip:'弥渡一中',sex:'女',age:60,name:'吴帆',id:'老师'}},
+	//                 {info:{descrip:'宣威一中',sex:'男',age:55,name:'小地理',id:'老师'}},
+	//                 {info:{descrip:'下关一中',sex:'男',age:15,name:'老y',id:'老师'}},
+	//                 {info:{descrip:'宾川一中',sex:'男',age:12,name:'鸡嘴',id:'学生'}}
+	// ];
 	var App = function (_React$Component) {
 	    _inherits(App, _React$Component);
 
 	    function App() {
 	        _classCallCheck(this, App);
 
-	        return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+	        // super(...) 做的事情就是生成一个 this。因为在原型继承中，如果一个类要继承自另一个类，那就得先实例化一次它的父类作为作为子类的原型。如果不做这件事，子类的原型就不能确定，当然也就无法创建 this。
+	        // 所以如果在 constructor 中没有 super(...) 就企图获取 this 就会报错。
+	        var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
+
+	        _this.state = {
+	            staff: new _STAFF2.default()
+	        };
+	        return _this;
 	    }
 
+	    //新增人员
+
+
 	    _createClass(App, [{
+	        key: 'addStaffItem',
+	        value: function addStaffItem(item) {
+	            this.setState({
+	                staff: this.state.staff.addStaffItem(item)
+	            });
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
 	                null,
 	                _react2.default.createElement(_StaffHeader2.default, null),
-	                _react2.default.createElement(_StaffItemPanel2.default, { items: rawData }),
-	                _react2.default.createElement(_StaffFooter2.default, null),
+	                _react2.default.createElement(_StaffItemPanel2.default, { items: this.state.staff.allStaff }),
+	                _react2.default.createElement(_StaffFooter2.default, { addStaffItem: this.addStaffItem.bind(this) }),
 	                _react2.default.createElement(_StaffDetail2.default, null)
 	            );
 	        }
@@ -114,11 +145,6 @@
 	}(_react2.default.Component);
 
 	_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('app'));
-
-	/*<StaffHeader/>
-	 <StaffItemPanel items={rawData}/>
-	 <StaffFooter/>
-	 <StaffDetail/>*/
 
 /***/ },
 /* 1 */
@@ -21832,11 +21858,17 @@
 	    value: true
 	});
 
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(34);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21859,6 +21891,67 @@
 	    }
 
 	    _createClass(StaffFooter, [{
+	        key: 'handlerAddClick',
+	        value: function handlerAddClick(evt) {
+	            var _this2 = this;
+
+	            evt.preventDefault();
+	            // 该方法将通知 Web 浏览器不要执行与事件关联的默认动作（如果存在这样的动作）。例如，如果 type 属性是 "submit"，在事件传播的任意阶段可以调用任意的事件句柄，通过调用该方法，可以阻止提交表单。注意，如果 Event 对象的 cancelable 属性是 fasle，那么就没有默认动作，或者不能阻止默认动作。无论哪种情况，调用该方法都没有作用。
+	            var item = {};
+	            var addForm = _reactDom2.default.findDOMNode(this.refs.addForm);
+	            var sex = addForm.querySelector('#staffAddSex');
+	            var id = addForm.querySelector('#staffAddId');
+
+	            item.name = addForm.querySelector('#staffAddName').value.trim();
+	            item.age = addForm.querySelector('#staffAddAge').value.trim();
+	            item.descrip = addForm.querySelector('#staffAddDescrip').value.trim();
+	            item.sex = sex.options[sex.selectedIndex].value;
+	            item.id = id.options[sex.selectedIndex].value;
+
+	            // 表单验证，确保信息不为空
+	            if (item.name == '' || item.age == '' || item.descrip == '') {
+	                var _ret = function () {
+	                    var tips = _reactDom2.default.findDOMNode(_this2.refs.tipsUnDone);
+	                    tips.style.display = 'block';
+	                    setTimeout(function () {
+	                        tips.style.display = 'none';
+	                    }, 1000);
+	                    return {
+	                        v: void 0
+	                    };
+	                }();
+
+	                if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+	            }
+
+	            //非负整数
+	            var numReg = /^\d+$/; //非负整数
+	            if (!numReg.test(item.age) || parseInt(item.age) > 150) {
+	                var _ret2 = function () {
+	                    var tips = _reactDom2.default.findDOMNode(_this2.refs.tipsUnAge);
+	                    tips.style.display = 'block';
+	                    setTimeout(function () {
+	                        tips.style.display = 'none';
+	                    }, 1000);
+	                    return {
+	                        v: void 0
+	                    };
+	                }();
+
+	                if ((typeof _ret2 === 'undefined' ? 'undefined' : _typeof(_ret2)) === "object") return _ret2.v;
+	            }
+
+	            this.props.addStaffItem(item); //这一行代码，就是调用了ManageSystem通过prop属性传入的回调函数
+	            addForm.reset();
+
+	            //此处应在返回添加成功信息后确认
+	            var tips = _reactDom2.default.findDOMNode(this.refs.tips);
+	            tips.style.display = 'block';
+	            setTimeout(function () {
+	                tips.style.display = 'none';
+	            }, 1000);
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
@@ -21979,7 +22072,7 @@
 	                        null,
 	                        _react2.default.createElement(
 	                            'button',
-	                            null,
+	                            { onClick: this.handlerAddClick.bind(this) },
 	                            '\u63D0\u4EA4'
 	                        )
 	                    )
@@ -22194,15 +22287,84 @@
 
 /***/ },
 /* 177 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	/**
+	 * Created by Acer on 2016/11/8.
+	 */
+	//单独建一个STAFF类来完成业务逻辑，包括排序、筛选、新增、删除、修改、以及关键字搜索等
+	//STAFF.js中创建两个类。为了实现更好的“封装性”，将每一个人员单独作为一个staffItem类，
+	// 该对象中包含该人员的所有信息，在本应用中包含他的姓名、年龄、性别、身份、个人描述等，
+	// 实践中我们可以加入类似入职时间，福利薪酬，个人经历等信息。
+	// 另外还有一个key值，它是一个类变量，这个值是唯一标识该staffItem用的。
+	//把ManageSystem.js中伪造好的数据也搬过来。
+	//在STAFF类的构造函数中，创建了2个实例变量，一个是allStaff，其中存储所有staffItem；
+	// 一个是staff，它是最终需要给React展示的数据，是经过用户筛选操作、关键字搜索操作之后得到的人员数组。
+	// 之所以这么设计变量也是为了后面的筛选、搜索等功能。
+
+
+	var staffItem = function staffItem(item) {
+	    _classCallCheck(this, staffItem);
+
+	    this.info = {};
+	    this.info.name = item.name;
+	    this.info.age = item.age || 0;
+	    this.info.sex = item.sex;
+	    this.info.id = item.id;
+	    this.info.descrip = item.descrip || '';
+	    this.key = ++staffItem.key;
+	};
+
+	staffItem.key = 0;
+
+	var STAFF = function () {
+	    function STAFF() {
+	        _classCallCheck(this, STAFF);
+
+	        this.allStaff = [new staffItem(STAFF.rawData[0]), new staffItem(STAFF.rawData[1]), new staffItem(STAFF.rawData[2]), new staffItem(STAFF.rawData[3]), new staffItem(STAFF.rawData[4]), new staffItem(STAFF.rawData[5]), new staffItem(STAFF.rawData[6]), new staffItem(STAFF.rawData[7]), new staffItem(STAFF.rawData[8]), new staffItem(STAFF.rawData[9]), new staffItem(STAFF.rawData[10])];
+	        this.staff = this.allStaff;
+	    }
+	    //增
+
+
+	    _createClass(STAFF, [{
+	        key: 'addStaffItem',
+	        value: function addStaffItem(item) {
+	            var newItem = new staffItem(item);
+	            this.allStaff.push(newItem);
+	            this.staff = this.allStaff;
+	            return this;
+	        }
+	    }]);
+
+	    return STAFF;
+	}();
+
+	exports.default = STAFF;
+
+	STAFF.rawData = [{ info: { descrip: '祥云1中', sex: '男', age: 57, name: '顾尚华', id: '老师' } }, { info: { descrip: '祥云二中', sex: '女', age: 30, name: '大作', id: '主任' } }, { info: { descrip: '祥华中学', sex: '男', age: 25, name: '老班', id: '主任' } }, { info: { descrip: '祥云四中', sex: '女', age: 40, name: '小作', id: '主任' } }, { info: { descrip: '大理一中', sex: '女', age: 70, name: '小翠', id: '老师' } }, { info: { descrip: '下关一中', sex: '男', age: 15, name: '色魔', id: '学生' } }, { info: { descrip: '宾川一中', sex: '男', age: 12, name: '小数学', id: '实习' } }, { info: { descrip: '弥渡一中', sex: '女', age: 60, name: '吴帆', id: '老师' } }, { info: { descrip: '宣威一中', sex: '男', age: 55, name: '小地理', id: '老师' } }, { info: { descrip: '下关一中', sex: '男', age: 15, name: '老y', id: '老师' } }, { info: { descrip: '宾川一中', sex: '男', age: 12, name: '鸡嘴', id: '学生' } }];
+
+/***/ },
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(178);
+	var content = __webpack_require__(179);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(180)(content, {});
+	var update = __webpack_require__(181)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -22219,21 +22381,21 @@
 	}
 
 /***/ },
-/* 178 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(179)();
+	exports = module.exports = __webpack_require__(180)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "body,html {\r\n    font-family: '\\5FAE\\8F6F\\96C5\\9ED1';\r\n}\r\n\r\n#app{\r\n    width: 600px;\r\n    margin: 100px auto;\r\n    position:  relative;\r\n}\r\n\r\n/* header */\r\n.optHeader {\r\n    margin: 30px 0;\r\n}\r\n.headerTd {\r\n    width: 33%;\r\n    text-align: center;\r\n}\r\n.optHeader select {\r\n    width: 5em;\r\n}\r\n\r\n.itemPanel {\r\n    width: 100%;\r\n    border: 2px solid #b0c4de;\r\n    border-radius: 4px;\r\n    margin-bottom: 100px;\r\n}\r\n.itemTd {\r\n    width: 20%;\r\n    line-height: 1.5em;\r\n    text-align: center;\r\n}\r\n.itemBtn {\r\n    width: 3em;\r\n    font-size: 80%;\r\n    color: #1e90ff;\r\n    display: inline-block;\r\n}\r\n.tempEmpty {\r\n    line-height: 1.5em;\r\n    background: #dcdcdc;\r\n}\r\n\r\n/* addForm */\r\n.addForm label{\r\n    text-align: center;\r\n}\r\n.addForm input, .addForm select, .addForm textarea{\r\n    width: 200px;\r\n    margin: 0 auto 10px auto;\r\n    display: block;\r\n}\r\n.addForm button {\r\n    padding: 3px 20px;\r\n    background-color: #1e90ff;\r\n    color: white;\r\n    font-weight: bold;\r\n    border-radius: 4px;\r\n    margin: 5px auto;\r\n    display: block;\r\n}\r\n\r\n.tips {\r\n    display: none;\r\n    color: #708090;\r\n    margin: 0 auto;\r\n    text-align: center;\r\n}\r\n\r\n.overLay {\r\n    text-align: center;\r\n    z-index: 100;\r\n    position: absolute;\r\n    left: 0;\r\n    top: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    padding-top: 50px;\r\n    background-color: rgba(255, 255, 255, 0);\r\n    animation-name: detailMerge;\r\n    animation-duration: 0.4s;\r\n    animation-fill-mode: forwards;\r\n}\r\n.overLay table {\r\n    width: 100%;\r\n}\r\n.overLay tr {\r\n    line-height: 1.5em;\r\n}\r\n.overLay th {\r\n    width: 40%;\r\n}\r\n.overLay td {\r\n    width: 60%;\r\n    text-align: center;\r\n}\r\n.overLay input, .overLay select, .overLay textarea {\r\n    width: 200px;\r\n}\r\n.overLay button {\r\n    padding: 3px 20px;\r\n    background-color: #1e90ff;\r\n    color: white;\r\n    font-weight: bold;\r\n    border-radius: 4px;\r\n    margin: 5px auto;\r\n    display: inline-block;\r\n}\r\n\r\n@keyframes detailMerge {\r\n    from {\r\n        background-color: rgba(255, 255, 255, 0);\r\n    }\r\n    to {\r\n        background-color: rgba(255, 255, 255, 0.95);\r\n    }\r\n}\r\n@-webkit-keyframes detailMerge {\r\n    from {\r\n        background-color: rgba(255, 255, 255, 0);\r\n    }\r\n    to {\r\n        background-color: rgba(255, 255, 255, 0.8);\r\n    }\r\n}", ""]);
+	exports.push([module.id, "body,html {\r\n    font-family: '\\5FAE\\8F6F\\96C5\\9ED1';\r\n    /*background-color: blue;*/\r\n}\r\n\r\n#app{\r\n    width: 600px;\r\n    margin: 100px auto;\r\n    position:  relative;\r\n}\r\n\r\n/* header */\r\n.optHeader {\r\n    margin: 30px 0;\r\n}\r\n.headerTd {\r\n    width: 33%;\r\n    text-align: center;\r\n}\r\n.optHeader select {\r\n    width: 5em;\r\n}\r\n\r\n.itemPanel {\r\n    width: 100%;\r\n    border: 2px solid #b0c4de;\r\n    border-radius: 4px;\r\n    margin-bottom: 100px;\r\n}\r\n.itemTd {\r\n    width: 20%;\r\n    line-height: 1.5em;\r\n    text-align: center;\r\n}\r\n.itemBtn {\r\n    width: 3em;\r\n    font-size: 80%;\r\n    color: #1e90ff;\r\n    display: inline-block;\r\n}\r\n.tempEmpty {\r\n    line-height: 1.5em;\r\n    background: #dcdcdc;\r\n}\r\n\r\n/* addForm */\r\n.addForm label{\r\n    text-align: center;\r\n}\r\n.addForm input, .addForm select, .addForm textarea{\r\n    width: 200px;\r\n    margin: 0 auto 10px auto;\r\n    display: block;\r\n}\r\n.addForm button {\r\n    padding: 3px 20px;\r\n    background-color: #1e90ff;\r\n    color: white;\r\n    font-weight: bold;\r\n    border-radius: 4px;\r\n    margin: 5px auto;\r\n    display: block;\r\n}\r\n\r\n.tips {\r\n    display: none;\r\n    color: #708090;\r\n    margin: 0 auto;\r\n    text-align: center;\r\n}\r\n\r\n.overLay {\r\n    text-align: center;\r\n    z-index: 100;\r\n    position: absolute;\r\n    left: 0;\r\n    top: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    padding-top: 50px;\r\n    background-color: rgba(255, 255, 255, 0);\r\n    animation-name: detailMerge;\r\n    animation-duration: 0.4s;\r\n    animation-fill-mode: forwards;\r\n}\r\n.overLay table {\r\n    width: 100%;\r\n}\r\n.overLay tr {\r\n    line-height: 1.5em;\r\n}\r\n.overLay th {\r\n    width: 40%;\r\n}\r\n.overLay td {\r\n    width: 60%;\r\n    text-align: center;\r\n}\r\n.overLay input, .overLay select, .overLay textarea {\r\n    width: 200px;\r\n}\r\n.overLay button {\r\n    padding: 3px 20px;\r\n    background-color: #1e90ff;\r\n    color: white;\r\n    font-weight: bold;\r\n    border-radius: 4px;\r\n    margin: 5px auto;\r\n    display: inline-block;\r\n}\r\n\r\n@keyframes detailMerge {\r\n    from {\r\n        background-color: rgba(255, 255, 255, 0);\r\n    }\r\n    to {\r\n        background-color: rgba(255, 255, 255, 0.95);\r\n    }\r\n}\r\n@-webkit-keyframes detailMerge {\r\n    from {\r\n        background-color: rgba(255, 255, 255, 0);\r\n    }\r\n    to {\r\n        background-color: rgba(255, 255, 255, 0.8);\r\n    }\r\n}", ""]);
 
 	// exports
 
 
 /***/ },
-/* 179 */
+/* 180 */
 /***/ function(module, exports) {
 
 	/*
@@ -22289,7 +22451,7 @@
 
 
 /***/ },
-/* 180 */
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*

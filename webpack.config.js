@@ -5,7 +5,7 @@ var config = {
     entry: './src/ManageSystem.js',
 
     output: {
-        path:__dirname,
+        path:__dirname + "/bundle/",
         filename: 'bundle.js',
     },
 
